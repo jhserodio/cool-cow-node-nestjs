@@ -11,36 +11,34 @@ import {
 import { CreateRancherDTO } from './create-rancher.dto';
 import { UpdateRancherDTO } from './update-rancher.dto';
 import { RancherService } from './rancher.service';
+import { ParamId } from 'src/decorators/param-id.decorator';
 
 @Controller('ranchers')
 export class RancherController {
   constructor(private readonly rancherService: RancherService) {}
 
   @Get(':id')
-  async get(@Param('id', ParseIntPipe) id: number): Promise<string> {
-    return `João Henrique Serodio ${id}`;
+  async get(@ParamId() id: number) {
+    return this.rancherService.get(id);
   }
 
   @Get()
-  async list(): Promise<string[]> {
-    return ['João Henrique Serodio', 'Marina Aparecida Serodio'];
+  async list(): Promise<CreateRancherDTO[]> {
+    return this.rancherService.list();
   }
 
   @Post()
-  async add(@Body() body: CreateRancherDTO): Promise<CreateRancherDTO> {
+  async add(@Body() body: CreateRancherDTO) {
     return this.rancherService.create(body);
   }
 
   @Put(':id')
-  async update(
-    @Body() body: UpdateRancherDTO,
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<{ body: UpdateRancherDTO; id: number }> {
-    return { body, id };
+  async update(@Body() body: UpdateRancherDTO, @ParamId() id: number) {
+    return this.rancherService.update(id, body);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number): Promise<string> {
-    return `remove user ${id}`;
+  async remove(@ParamId() id: number) {
+    return this.rancherService.delete(id);
   }
 }

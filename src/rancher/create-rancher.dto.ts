@@ -1,4 +1,5 @@
-import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsDate, IsEmail, IsString, IsStrongPassword } from 'class-validator';
 
 export class CreateRancherDTO {
   @IsString()
@@ -11,4 +12,8 @@ export class CreateRancherDTO {
     minLength: 8,
   })
   password: string;
+
+  @Type(() => Date)
+  @IsDate()
+  birthDate: Date;
 }

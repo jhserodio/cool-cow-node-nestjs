@@ -11,10 +11,11 @@ datasource db {
 }
 
 model Rancher {
-  id       Int @id @default(autoincrement())
-  email    String @unique
-  name     String
-  password String
+  id        Int @id @default(autoincrement())
+  email     String @unique
+  name      String
+  birthDate DateTime
+  password  String
 
   @@map("ranchers")
 }
