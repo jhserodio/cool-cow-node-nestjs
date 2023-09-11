@@ -1,15 +1,6 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Put,
-} from '@nestjs/common';
-import { CreateRancherDTO } from './create-rancher.dto';
-import { UpdateRancherDTO } from './update-rancher.dto';
+import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { CreateRancherDTO } from './dto/create-rancher.dto';
+import { UpdateRancherDTO } from './dto/update-rancher.dto';
 import { RancherService } from './rancher.service';
 import { ParamId } from 'src/decorators/param-id.decorator';
 
